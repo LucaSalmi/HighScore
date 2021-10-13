@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">HighScore</string>
+    <string name="score_text">Score</string>
+    <string name="highscore_text">Highscore</string>
+    <string name="button_text">Click Me!</string>
+</resources>
