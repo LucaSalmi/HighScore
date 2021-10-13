@@ -33,10 +33,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        sp = getSharedPreferences("com.khystudent.highscore.MyPrefs", MODE_PRIVATE);
         highScoreNumber = sp.getInt("Highscore", 0);
+
         setIDs();
         setListeners();
-        sp = getSharedPreferences("com.khystudent.highscore.MyPrefs", MODE_PRIVATE);
+        publishHighScore();
 
 
     }
@@ -71,12 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
         pointsPrint = Integer.toString(pointsNumber);
         points.setText(pointsPrint);
-        saveHighScore();
 
     }
 
     public void publishHighScore(){
-        highScoreNumber = pointsNumber;
+
         highScorePrint = Integer.toString(highScoreNumber);
         highScore.setText(highScorePrint);
     }
@@ -84,7 +85,10 @@ public class MainActivity extends AppCompatActivity {
     public void checkScore(){
 
         if (pointsNumber > highScoreNumber){
+
+            highScoreNumber = pointsNumber;
             publishHighScore();
+            saveHighScore();
         }
         publishScore();
     }
