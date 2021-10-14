@@ -5,4 +5,9 @@
     <string name="button_text">Click Me!</string>
     <string name="save_btn">Save</string>
     <string name="load_btn">Load</string>
+    <string name="btn_change_1">It tickles!!! ;)</string>
+    <string name="btn_change_2">Stop!</string>
+    <string name="btn_change_3">Seriously stop</string>
+    <string name="btn_change_4">Oh god please, STOP!</string>
+    <string name="btn_change_5">STOOOOP!</string>
 </resources>

@@ -3,8 +3,10 @@ package com.khystudent.highscore;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.Random;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,10 +32,10 @@ public class MainActivity extends AppCompatActivity {
     int max = 10;
     int min = 1;
     int range = max - min + 1;
+    int counter = 0;
 
     String highScorePrint;
     String pointsPrint;
-
 
 
     @Override
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         pointButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                buttonTextChanger();
                 createRandom();
 
             }
@@ -135,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         if (!file.exists()) {
             file.mkdir();
         }
+
         try {
             File textFile = new File(file, "saves.txt");
             PrintWriter writer = new PrintWriter(textFile);
@@ -148,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void readFromText(File file){
+    public void readFromText(File file) {
 
         File readFile = new File(file, "saves.txt");
         try {
@@ -161,5 +167,30 @@ public class MainActivity extends AppCompatActivity {
         pointsNumber = Integer.parseInt(points.getText().toString());
 
     }
+
+    public void buttonTextChanger() {
+
+        counter += 1;
+
+        switch (counter){
+            case 10:
+                pointButton.setText(R.string.btn_change_1);
+                break;
+            case 20:
+                pointButton.setText(R.string.btn_change_2);
+                break;
+            case 30:
+                pointButton.setText(R.string.btn_change_3);
+                break;
+            case 40:
+                pointButton.setText(R.string.btn_change_4);
+                break;
+            case 50:
+                pointButton.setText(R.string.btn_change_5);
+                break;
+        }
+
+    }
+
 
 }
