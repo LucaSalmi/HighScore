@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:background="@drawable/text_border"
         android:gravity="center"
-        android:text="@string/highscore_text"
-        android:textSize="@dimen/text_size"
         android:paddingTop="@dimen/padding_5"
         android:paddingBottom="@dimen/padding_5"
-        android:background="@drawable/text_border"/>
+        android:text="@string/highscore_text"
+        android:textSize="@dimen/text_size" />
 
     <TextView
         android:id="@+id/text_points"
@@ -25,13 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_highscore"
         android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/margin_15"
+        android:background="@drawable/text_border"
         android:gravity="center"
-        android:text="@string/score_text"
-        android:textSize="@dimen/text_size"
         android:paddingTop="@dimen/padding_5"
         android:paddingBottom="@dimen/padding_5"
-        android:layout_marginTop="@dimen/margin_15"
-        android:background="@drawable/text_border"/>
+        android:text="@string/score_text"
+        android:textSize="@dimen/text_size" />
 
     <Button
         android:id="@+id/point_button"
@@ -39,8 +39,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/text_points"
         android:layout_centerInParent="true"
-        android:text="@string/button_text"
         android:layout_marginTop="@dimen/margin_15"
-        android:textSize="@dimen/margin_15"/>
+        android:text="@string/button_text"
+        android:textSize="@dimen/margin_15" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/point_button"
+        android:layout_marginTop="@dimen/margin_15"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_btn"></Button>
+
+        <Button
+            android:id="@+id/load_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:text="@string/load_btn"></Button>
+
+    </LinearLayout>
 </RelativeLayout>

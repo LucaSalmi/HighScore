@@ -9,9 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 public class MainActivity extends AppCompatActivity {
 
     Button pointButton;
+    Button savePoints;
+    Button loadPoints;
     TextView highScore;
     TextView points;
 
@@ -35,15 +42,17 @@ public class MainActivity extends AppCompatActivity {
 
         sp = getSharedPreferences("com.khystudent.highscore.MyPrefs", MODE_PRIVATE);
         highScoreNumber = sp.getInt("Highscore", 0);
+        File file = new File(MainActivity.this.getFilesDir(), "text");
+
 
         setIDs();
-        setListeners();
+        setListeners(file);
         publishHighScore();
 
 
     }
 
-    private void setListeners() {
+    private void setListeners(File file) {
 
         pointButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,38 +62,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        savePoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                saveToText(file);
+
+            }
+        });
+
+        loadPoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readFromText(file);
+
+            }
+        });
+
     }
 
-    public void setIDs(){
+    public void setIDs() {
 
         pointButton = findViewById(R.id.point_button);
         highScore = findViewById(R.id.text_highscore);
         points = findViewById(R.id.text_points);
+        loadPoints = findViewById(R.id.load_btn);
+        savePoints = findViewById(R.id.save_btn);
     }
 
-    public void saveHighScore(){
+    public void saveHighScore() {
 
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("Highscore", highScoreNumber);
         editor.apply();
     }
 
-    public void publishScore(){
+    public void publishScore() {
 
         pointsPrint = Integer.toString(pointsNumber);
         points.setText(pointsPrint);
 
     }
 
-    public void publishHighScore(){
+    public void publishHighScore() {
 
         highScorePrint = Integer.toString(highScoreNumber);
         highScore.setText(highScorePrint);
     }
 
-    public void checkScore(){
+    public void checkScore() {
 
-        if (pointsNumber > highScoreNumber){
+        if (pointsNumber > highScoreNumber) {
 
             highScoreNumber = pointsNumber;
             publishHighScore();
@@ -95,13 +123,42 @@ public class MainActivity extends AppCompatActivity {
 
     private void createRandom() {
 
-        int a  = (int)(Math.random()*range)+min;
+        int a = (int) (Math.random() * range) + min;
         pointsNumber += a;
-        String aPrint = Integer.toString(a);
-        Toast.makeText(MainActivity.this, aPrint, Toast.LENGTH_SHORT).show();
         checkScore();
 
     }
 
+    public void saveToText(File file) {
+
+
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        try {
+            File textFile = new File(file, "saves.txt");
+            PrintWriter writer = new PrintWriter(textFile);
+            writer.write(points.getText().toString());
+            writer.close();
+            Toast.makeText(MainActivity.this, "Points saved", Toast.LENGTH_LONG).show();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void readFromText(File file){
+
+        File readFile = new File(file, "saves.txt");
+        try {
+            Scanner sc = new Scanner(readFile);
+            points.setText(sc.nextLine());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Toast.makeText(MainActivity.this, "Points loaded", Toast.LENGTH_LONG).show();
+
+    }
 
 }
