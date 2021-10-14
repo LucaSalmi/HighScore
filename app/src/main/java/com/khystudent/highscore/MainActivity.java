@@ -158,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         Toast.makeText(MainActivity.this, "Points loaded", Toast.LENGTH_LONG).show();
+        pointsNumber = Integer.parseInt(points.getText().toString());
 
     }
 
